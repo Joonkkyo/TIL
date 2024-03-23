@@ -1,4 +1,4 @@
-package poly.ex3;
+package poly.ex6;
 
 public class Dog extends AbstractAnimal {
     @Override
