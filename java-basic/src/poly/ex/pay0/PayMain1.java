@@ -1,7 +1,7 @@
 package poly.ex.pay0;
 
 
-public class PayMain0 {
+public class PayMain1 {
     public static void main(String[] args) {
         PayService payService = new PayService();
 
