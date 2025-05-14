@@ -4,14 +4,14 @@ import { createContext, useState } from 'react'
 
 type IsActiveState = [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 
-export const isActiveContext = createContext<IsActiveState | null>(null)
+export const IsActiveContext = createContext<IsActiveState | null>(null)
 
 export default function B2() {
   const isActiveState = useState(true)
   return (
-    <isActiveContext.Provider value={isActiveState}>
+    <IsActiveContext.Provider value={isActiveState}>
       <B3_1 />
       <B3_2 />
-    </isActiveContext.Provider>
+    </IsActiveContext.Provider>
   )
 }

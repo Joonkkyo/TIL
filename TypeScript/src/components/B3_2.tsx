@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { isActiveContext } from './B2'
+import { IsActiveContext } from './B2'
 
 export default function Comp() {
-  const [isActive, setIsActive] = useContext(isActiveContext)
+  const [isActive, setIsActive] = useContext(IsActiveContext)!
   return (
     <h2
       onClick={() => {
