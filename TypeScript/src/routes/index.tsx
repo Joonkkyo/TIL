@@ -22,11 +22,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/movies',
-        element: <Movies />
-      },
-      {
-        path: '/movies/:movieId', // movieId가 주소 변수로 사용됨 (동적 세그먼트))
-        element: <MovieDetails />
+        element: <Movies />,
+        children: [
+          {
+            path: ':movieId', // movieId가 주소 변수로 사용됨 (동적 세그먼트))
+            element: <MovieDetails />
+          }
+        ]
       }
     ]
   },

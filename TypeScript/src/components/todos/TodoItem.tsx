@@ -53,12 +53,13 @@ export default function TodoItem({ todo }: { todo: Todo }) {
             onKeyDown={handleKeyDown}
           />
           <Button
-            onClick={() =>
+            onClick={() => {
               updateTodo({
                 ...todo,
                 title // 덮어쓰기
               })
-            }
+              setIsEditMode(false)
+            }}
             color="primary"
             loading={loading}>
             저장

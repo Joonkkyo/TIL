@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import { useMovieStore } from '@/stores/movie'
 import Image from '@/components/Image'
 import Loader from '@/components/Loader'
+import Modal from '@/components/Modal'
 
 // 리액트 훅 => 반드시 리액트 컴포넌트 함수 안에서 호출해야 함
 // /movies/tt4154796
@@ -16,15 +17,15 @@ export default function MovieDetails() {
     if (movieId) {
       fetchMovieDetails(movieId)
     }
-  }, [movieId])
+  }, [])
 
   return (
-    <>
+    <Modal>
       {isLoading ? (
         <Loader />
       ) : (
         currentMovie && (
-          <div className="m-auto flex max-w-[1100px] gap-[20px]">
+          <div>
             <div>
               <Image
                 src={currentMovie.Poster.replace('SX300', 'SX1000')}
@@ -40,6 +41,6 @@ export default function MovieDetails() {
           </div>
         )
       )}
-    </>
+    </Modal>
   )
 }
