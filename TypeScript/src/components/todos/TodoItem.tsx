@@ -8,7 +8,7 @@ import Button from '@/components/Button'
 export default function TodoItem({ todo }: { todo: Todo }) {
   const [isEditMode, setIsEditMode] = useState(false)
   const [title, setTitle] = useState(todo.title)
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   const updateTodo = useTodoStore(state => state.updateTodo)
   const deleteTodo = useTodoStore(state => state.deleteTodo)
   const inputRef = useRef<HTMLInputElement | null>(null)

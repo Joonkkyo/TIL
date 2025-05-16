@@ -13,8 +13,10 @@ export default function MovieDetails() {
   const isLoading = useMovieStore(state => state.isLoading)
 
   useEffect(() => {
-    fetchMovieDetails(movieId)
-  }, [])
+    if (movieId) {
+      fetchMovieDetails(movieId)
+    }
+  }, [movieId])
 
   return (
     <>
