@@ -11,4 +11,4 @@
 export default 123 // import abc from './abc'
 
 // 2) Named Export
-export 123 // import { abc as abc123} from './abc'
+export const abc = 123 // import { abc as abc123} from './abc'
