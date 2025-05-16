@@ -1,13 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
 import type { Todo } from '@/stores/todo'
 import { useTodoStore } from '@/stores/todo'
+import Button from '@/components/Button'
 
 // Default Export
 // Named Export
 export default function TodoItem({ todo }: { todo: Todo }) {
   const [isEditMode, setIsEditMode] = useState(false)
   const [title, setTitle] = useState(todo.title)
+  const [loading, setLoading] = useState(false)
   const updateTodo = useTodoStore(state => state.updateTodo)
+  const deleteTodo = useTodoStore(state => state.deleteTodo)
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
@@ -17,6 +20,25 @@ export default function TodoItem({ todo }: { todo: Todo }) {
       inputRef.current?.focus()
     }
   }, [isEditMode])
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.nativeEvent.isComposing) return
+    if (e.key === 'Enter') {
+      updateTodo({
+        ...todo,
+        title // 덮어쓰기
+      })
+    }
+
+    if (e.key === 'Escape') {
+      handleCancel()
+    }
+  }
+
+  function handleCancel() {
+    setIsEditMode(false)
+    setTitle(todo.title)
+  }
 
   return (
     <div className="flex gap-[10px]">
@@ -28,33 +50,43 @@ export default function TodoItem({ todo }: { todo: Todo }) {
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-                updateTodo({
-                  ...todo,
-                  title // 덮어쓰기
-                })
-              }
-            }}
+            onKeyDown={handleKeyDown}
           />
-          <button
+          <Button
             onClick={() =>
               updateTodo({
                 ...todo,
                 title // 덮어쓰기
               })
-            }>
+            }
+            color="primary"
+            loading={loading}>
             저장
-          </button>
+          </Button>
+          <Button
+            onClick={handleCancel}
+            color="secondary"
+            loading={loading}>
+            취소
+          </Button>
         </>
       ) : (
         <>
           <div>{todo.title}</div>
-          <button
+          <Button
             className="rounded-md bg-blue-500 px-2 text-white"
+            color="primary"
+            loading={loading}
             onClick={() => setIsEditMode(true)}>
             수정
-          </button>
+          </Button>
+          <Button
+            className="rounded-md bg-blue-500 px-2 text-white"
+            color="danger"
+            loading={loading}
+            onClick={() => deleteTodo(todo)}>
+            삭제
+          </Button>
         </>
       )}
     </div>

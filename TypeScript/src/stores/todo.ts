@@ -42,6 +42,7 @@ export const useTodoStore = create(
       }
 
       async function updateTodo(todo: Todo) {
+        if (!todo.title.trim()) return
         await requestTodos({
           todoId: todo.id,
           method: 'PUT',
@@ -58,11 +59,20 @@ export const useTodoStore = create(
         // })
       }
 
+      async function deleteTodo(todo: Todo) {
+        await requestTodos({
+          todoId: todo.id,
+          method: 'DELETE'
+        })
+        await fetchTodos() // 삭제 완료되면 새 목록 가져옴
+      }
+
       return {
         setTitle,
         fetchTodos,
         createTodo,
-        updateTodo
+        updateTodo,
+        deleteTodo
       }
     }
   )

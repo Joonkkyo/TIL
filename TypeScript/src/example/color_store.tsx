@@ -1,4 +1,4 @@
-import A1 from '../components/A1'
+import A1 from './A1'
 import { useColorStore } from '../stores/color'
 
 export default function App() {

@@ -23,7 +23,7 @@ function fetchMovies(searchText) {
 }
 
 try {
-  const res = await fetchMovies()
+  const res = await fetchMovies('avengers')
   console.log(res)
 } catch (error) {
   console.log(error.message)

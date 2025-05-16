@@ -1,4 +1,4 @@
-import A2 from './A2'
+import A2 from '../components/A2'
 import { useContext } from 'react'
 // import { ColorContext } from '../App'
 
